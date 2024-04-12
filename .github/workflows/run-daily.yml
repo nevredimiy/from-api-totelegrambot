@@ -1,8 +1,17 @@
 name: Woocommerce Orders to Telegram-bot
 on: [push]
+env:
+    TELEGRAM_TOCKEN: ${{TELEGRAM_TOCKEN}}
+    TELEGRAM_CHANNEL_ID: ${{TELEGRAM_CHANNEL_ID}}
+    COSTUMER_KEY: ${{COSTUMER_KEY}}
+    COSTUMER_SECRET: ${{COSTUMER_SECRET}}
 jobs:
     Daily-Run:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
+            - name: Install requirements
+              uses: pip install -r .\requirements.txt
+            - name: Run Code
+              uses: python app.py
