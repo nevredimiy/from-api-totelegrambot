@@ -1,10 +1,11 @@
 name: Woocommerce Orders to Telegram-bot
-on: [push]
+on:
+    push:
 env:
-    TELEGRAM_TOCKEN: ${{TELEGRAM_TOCKEN}}
-    TELEGRAM_CHANNEL_ID: ${{TELEGRAM_CHANNEL_ID}}
-    COSTUMER_KEY: ${{COSTUMER_KEY}}
-    COSTUMER_SECRET: ${{COSTUMER_SECRET}}
+    TELEGRAM_TOCKEN: ${{secrets.TELEGRAM_TOCKEN}}
+    TELEGRAM_CHANNEL_ID: ${{secrets.TELEGRAM_CHANNEL_ID}}
+    COSTUMER_KEY: ${{secrets.COSTUMER_KEY}}
+    COSTUMER_SECRET: ${{secrets.COSTUMER_SECRET}}
 jobs:
     Daily-Run:
         runs-on: ubuntu-latest
