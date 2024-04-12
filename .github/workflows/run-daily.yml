@@ -1,6 +1,7 @@
 name: Woocommerce Orders to Telegram-bot
 on:
-    push:
+    schedule:
+      - cron: '0 9 * * *'
 env:
     TELEGRAM_TOCKEN: ${{secrets.TELEGRAM_TOCKEN}}
     TELEGRAM_CHANNEL_ID: ${{secrets.TELEGRAM_CHANNEL_ID}}
