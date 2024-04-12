@@ -1,0 +1,8 @@
+name: Woocommerce Orders to Telegram-bot
+on: [push]
+jobs:
+    Daily-Run:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              user: actions/checkout@v4
