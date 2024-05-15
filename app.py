@@ -2,9 +2,39 @@ import os
 import requests
 from woocommerce import API
 from dotenv import load_dotenv
-import json
 
 load_dotenv()
+
+def saveOrdersInFile(data=''):
+    with open('orders.txt', "w") as file:
+        if data == '':
+            orders = get_orders()
+            file.write(orders)
+        else:
+            file.write(data)
+
+
+def compareOrders(orders):
+    if not os.path.exists('orders.txt'):
+        saveOrdersInFile()
+    lastOrders = []
+    message = ''
+    with open("orders.txt", "r") as fp:
+        lastOrders = fp.read().split()
+    orders = orders.split()
+    if orders[0] != lastOrders[0]:
+        for idx, order in enumerate(orders):
+            if order == lastOrders[0]:
+                message = f'Есть новые заказы: {orders[0:idx]}'
+                break
+            else:
+                message = f'У тебя 10 заказов!!! Работай!!!'
+        orders = " ".join(orders)
+        saveOrdersInFile(orders)
+    else:
+        message = 'Новых заказов нет'
+    return message
+
 def get_orders():
     COSTUMER_KEY = os.getenv('COSTUMER_KEY')
     COSTUMER_SECRET = os.getenv('COSTUMER_SECRET')
@@ -18,7 +48,6 @@ def get_orders():
     ids = []
     for order in allOrders:
         ids.append(order['id'])
-    print(ids)
     return " ".join(map(str,ids))
 
 def send_message(message):
@@ -35,4 +64,5 @@ def send_message(message):
 
 if __name__ == '__main__':
     orders = get_orders()
-    send_message(orders)
+    mes = compareOrders(orders)
+    send_message(mes)
