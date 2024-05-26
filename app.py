@@ -66,3 +66,4 @@ if __name__ == '__main__':
     orders = get_orders()
     mes = compareOrders(orders)
     send_message(mes)
+    # saveOrdersInFile()
